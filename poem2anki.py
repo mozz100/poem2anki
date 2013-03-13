@@ -49,7 +49,7 @@ def main():
     # Fill up the first card
     # We need one question line plus however many answer lines
     try:
-        for i in range(1 + alines):
+        for i in range(qlines + alines):
             cardshift(line_reader.next())
     except StopIteration:
         print >>sys.stderr, "Insufficient lines for a single card"
