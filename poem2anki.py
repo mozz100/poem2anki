@@ -24,9 +24,21 @@ def main():
     parser.add_argument("-a", "--alines", type=int, default=1, 
         help="No. of lines in answer")
 
+    # -flines option allows you to control how the first card(s)
+    # behave.  The default behaviour is for the first card's front
+    # side to be a single line.  If you're using qlines=1, this
+    # is the only really sensible behaviour.
+
+    # If you're using qlines>1, you can use flines to set how many lines
+    # of the source text appear on the front side of the first
+    # generated card.
+    parser.add_argument("-f", "--flines", type=int, default=1,
+        help="No. of lines on first question")
+
     args = parser.parse_args()
     qlines = args.qlines
     alines = args.alines
+    flines = args.flines
 
     # Take out blank lines
     poem = [rl.strip() for rl in sys.stdin.readlines() 
@@ -47,9 +59,9 @@ def main():
     line_reader = iter(poem)
 
     # Fill up the first card
-    # We need <qlines> question lines plus <alines> answer lines
+    # We need <flines> question lines plus <alines> answer lines
     try:
-        for i in range(qlines + alines):
+        for i in range(flines + alines):
             cardshift(line_reader.next())
     except StopIteration:
         print >>sys.stderr, "Insufficient lines for a single card"
