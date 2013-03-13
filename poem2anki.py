@@ -47,7 +47,7 @@ def main():
     line_reader = iter(poem)
 
     # Fill up the first card
-    # We need one question line plus however many answer lines
+    # We need <qlines> question lines plus <alines> answer lines
     try:
         for i in range(qlines + alines):
             cardshift(line_reader.next())
